@@ -27,12 +27,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         ("camp_owner", "Владелец лагеря"),
     )
 
-    email = models.EmailField(unique=True)
-    full_name = models.CharField(max_length=255, blank=True)
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="parent")
+    email = models.EmailField("Email", unique=True)
+    full_name = models.CharField("Полное имя", max_length=255, blank=True)
+    role = models.CharField("Роль", max_length=20, choices=ROLE_CHOICES, default="parent")
 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField("Активен", default=True)
+    is_staff = models.BooleanField("Статус персонала", default=False)
 
     objects = UserManager()
 
@@ -41,3 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
